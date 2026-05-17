@@ -8,9 +8,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <style>
         body { 
-            background-color: #f5f7fa; 
+            background-color: #aae7ff; 
             margin: 0; 
-            padding: 15px; 
+            padding: 20px; 
             font-family: 'Segoe UI', Arial, sans-serif; 
             display: flex; 
             flex-direction: column; 
@@ -19,17 +19,17 @@
             color: #333333;
         }
         
-        .top-nav { width: 100%; max-width: 850px; display: flex; justify-content: flex-start; margin-bottom: 10px; }
+        .top-nav { width: 100%; max-width: 850px; display: flex; justify-content: flex-start; margin-bottom: 15px; }
         
         .refresh-btn { 
             background-color: #ffeb3b; 
             color: black; 
             border: 1px solid #fbc02d; 
-            padding: 10px 22px; 
+            padding: 8px 20px; 
             font-weight: bold; 
-            border-radius: 6px; 
+            border-radius: 4px; 
             cursor: pointer; 
-            font-size: 14px; 
+            font-size: 13px; 
         }
 
         .report-paper { 
@@ -37,76 +37,73 @@
             max-width: 850px; 
             background-color: #ffffff; 
             color: #222222; 
-            padding: 40px 30px; 
+            padding: 50px 40px; 
             box-sizing: border-box; 
-            border-radius: 12px; 
-            border: 1px solid #e0e0e0; 
             position: relative; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
         }
+
+        .main-title { text-align: center; margin-bottom: 25px; margin-top: 10px; }
+        .main-title h1 { color: #2196f3; margin: 0; font-size: 36px; font-weight: bold; }
+        .main-title p { color: #666666; font-size: 16px; margin: 8px 0 0 0; font-weight: 500; }
 
         .header-info { 
             display: flex; 
             justify-content: space-between; 
-            font-size: 14px; 
+            font-size: 16px; 
             color: #555555; 
-            border-bottom: 2px solid #2196f3; 
-            padding-bottom: 15px; 
-            margin-bottom: 30px; 
-            font-weight: 500;
+            border-bottom: 3px solid #2196f3; 
+            padding-bottom: 12px; 
+            margin-bottom: 35px; 
+            font-weight: bold;
         }
 
-        .main-title { text-align: center; margin-bottom: 30px; }
-        .main-title h1 { color: #2196f3; margin: 0; font-size: 32px; font-weight: bold; }
-        .main-title p { color: #666666; font-size: 16px; margin: 5px 0; font-weight: 500; }
-
-        .action-area { display: flex; justify-content: center; gap: 20px; margin: 35px 0; }
+        .action-area { display: flex; justify-content: center; gap: 20px; margin: 20px 0 35px 0; }
         
         .btn { 
-            padding: 20px 40px; 
-            font-size: 18px; 
+            padding: 15px 35px; 
+            font-size: 16px; 
             font-weight: bold; 
-            border-radius: 10px; 
+            border-radius: 8px; 
             cursor: pointer; 
             border: none; 
             color: white; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
             text-align: center;
         }
-        .btn-red { background-color: #f44336; flex: 1.4; }
-        .btn-green { background-color: #4caf50; flex: 1; }
+        .btn-red { background-color: #e53935; }
+        .btn-green { background-color: #4caf50; }
 
-        #image-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 30px; }
+        #image-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 25px; }
         
-        /* دۆخی نیشاندانی ژمارە لەسەر شاشەی مۆبایل */
         .img-box { 
-            border: 1px solid #dddddd; 
-            background: #f9f9f9; 
+            border: 1px solid #cccccc; 
+            background: #fafafa; 
             aspect-ratio: 4/3; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             overflow: hidden; 
-            border-radius: 6px; 
+            border-radius: 4px; 
             position: relative;
         }
+        /* Keep full original ratio on screen preview */
         .img-box img { width: 100%; height: 100%; object-fit: contain; }
         
-        /* باج یان نیشانەی ژمارەی وێنەکان لەسەر شاشە */
         .img-number {
             position: absolute;
-            top: 5px;
-            left: 5px;
+            top: 4px;
+            left: 4px;
             background-color: #2196f3;
             color: white;
-            padding: 2px 8px;
-            font-size: 12px;
+            padding: 1px 5px;
+            font-size: 11px;
             font-weight: bold;
-            border-radius: 4px;
+            border-radius: 3px;
             z-index: 10;
         }
 
-        .footer-credit { text-align: center; font-size: 12px; color: #999999; margin-top: 50px; border-top: 1px solid #eeeeee; padding-top: 20px; }
+        .footer-credit { text-align: center; font-size: 11px; color: #aaaaaa; margin-top: 60px; border-top: 1px solid #eeeeee; padding-top: 15px; }
         input[type="file"] { display: none; }
     </style>
 </head>
@@ -117,14 +114,14 @@
     </div>
 
     <div class="report-paper">
-        <div class="header-info">
-            <div id="pdf-date">Date: --/--/----</div>
-            <div id="pdf-patient">Patient Name: ...</div>
-        </div>
-
         <div class="main-title">
             <h1>Bawayi Dental Clinic</h1>
             <p>Dental and Maxillofacial Radiology</p>
+        </div>
+
+        <div class="header-info">
+            <div id="pdf-date">Date: --/--/----</div>
+            <div id="pdf-patient">Patient Name: ...</div>
         </div>
 
         <div class="action-area">
@@ -167,7 +164,7 @@
                         
                         for (let i = 1; i <= pdf.numPages; i++) {
                             const page = await pdf.getPage(i);
-                            const viewport = page.getViewport({ scale: 2.0 });
+                            const viewport = page.getViewport({ scale: 3.5 }); // High-res render
                             
                             const canvas = document.createElement('canvas');
                             const context = canvas.getContext('2d');
@@ -177,8 +174,10 @@
                             await page.render({ canvasContext: context, viewport: viewport }).promise;
                             
                             tempImages.push({
-                                src: canvas.toDataURL('image/jpeg'),
-                                ratio: canvas.width / canvas.height // پێوانەکردنی ڕێژەی پانی بە درێژی
+                                src: canvas.toDataURL('image/jpeg', 1.0),
+                                ratio: canvas.width / canvas.height,
+                                origWidth: canvas.width,
+                                origHeight: canvas.height
                             });
                         }
                         resolve();
@@ -194,7 +193,9 @@
                         img.onload = function() {
                             tempImages.push({
                                 src: event.target.result,
-                                ratio: img.width / img.height
+                                ratio: img.width / img.height,
+                                origWidth: img.width,
+                                origHeight: img.height
                             });
                             resolve();
                         };
@@ -206,17 +207,16 @@
             }
         }
 
-        // لێرەدا ڕێکخستنی زیرەک دەکەین: وێنە پانەکان (تەواوی ددانەکان) دەچنە سەرەتا
+        // Smart sorting: Panorama views always pushed to the top
         tempImages.sort((a, b) => b.ratio - a.ratio);
-        imagesData = tempImages.map(item => item.src);
+        imagesData = tempImages;
 
-        // نوێکردنەوەی نیشاندانی سەر شاشە لەگەڵ ژمارەکان
         const grid = document.getElementById('image-grid');
         grid.innerHTML = "";
-        imagesData.forEach((src, index) => {
+        imagesData.forEach((imgObj, index) => {
             const div = document.createElement('div');
             div.className = 'img-box';
-            div.innerHTML = `<span class="img-number">${index + 1}</span><img src="${src}">`;
+            div.innerHTML = `<span class="img-number">${index + 1}</span><img src="${imgObj.src}">`;
             grid.appendChild(div);
         });
     });
@@ -231,31 +231,31 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         ctx.fillStyle = '#2196f3';
-        ctx.font = 'bold 60px Arial, sans-serif';
+        ctx.font = 'bold 62px Arial, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('Bawayi Dental Clinic', 800, 120);
+        ctx.fillText('Bawayi Dental Clinic', 800, 110);
         
         ctx.fillStyle = '#666666';
-        ctx.font = '500 30px Arial, sans-serif';
-        ctx.fillText('Dental and Maxillofacial Radiology', 800, 180);
+        ctx.font = '500 28px Arial, sans-serif';
+        ctx.fillText('Dental and Maxillofacial Radiology', 800, 165);
         
-        ctx.fillStyle = '#555555';
+        ctx.fillStyle = '#444444';
         ctx.font = 'bold 28px Arial, sans-serif';
         
         ctx.textAlign = 'left';
-        ctx.fillText('Date: ' + dateStr, 60, 260);
+        ctx.fillText('Date: ' + dateStr, 60, 255);
         
         ctx.textAlign = 'right';
-        ctx.fillText('Patient Name: ' + patientStr, 1540, 260);
+        ctx.fillText('Patient Name: ' + patientStr, 1540, 255);
         
         ctx.strokeStyle = '#2196f3';
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 5;
         ctx.beginPath();
-        ctx.moveTo(40, 300);
-        ctx.lineTo(1560, 300);
+        ctx.moveTo(40, 295);
+        ctx.lineTo(1560, 295);
         ctx.stroke();
         
-        return canvas.toDataURL('image/jpeg');
+        return canvas.toDataURL('image/jpeg', 1.0);
     }
 
     async function generatePDF() {
@@ -281,56 +281,83 @@
         let xPos = 12;
 
         for (let i = 0; i < imagesData.length; i++) {
+            const currentImg = imagesData[i];
+            
             if (i < 3) {
-                // کێشانی سێ وێنە گەورەکەی سەرەتا (وێنە پانۆراماکان)
-                doc.addImage(imagesData[i], 'JPEG', xPos, yPos, 58, 48);
+                // تەرخانکردنی چوارگۆشەی سەرەکی بۆ ٣ وێنە گەورەکە (ماکسیمم تا پانی ٥٨ و درێژی ٤٤)
+                let maxWidth = 58;
+                let maxHeight = 44;
+                let finalWidth = maxWidth;
+                let finalHeight = maxWidth / currentImg.ratio;
+
+                if (finalHeight > maxHeight) {
+                    finalHeight = maxHeight;
+                    finalWidth = maxHeight * currentImg.ratio;
+                }
+
+                // سێنتەرکردنی وێنەکە لە ناو ناوچەی تەرخانکراوی خۆی بۆ جوانکاری
+                let xOffset = xPos + (maxWidth - finalWidth) / 2;
+                let yOffset = yPos + (maxHeight - finalHeight) / 2;
+
+                doc.addImage(currentImg.src, 'JPEG', xOffset, yOffset, finalWidth, finalHeight, undefined, 'FAST');
                 
-                // نووسینی ژمارەی وێنەکە لە گۆشەی سەرەوەی چەپ
+                // کێشانی نیشانەی ژمارەی وێنە لە گۆشەی ڕاستەقینەی ناوچەکە
                 doc.setFillColor(33, 150, 243);
-                doc.rect(xPos + 1, yPos + 1, 6, 5, 'F');
+                doc.rect(xPos + 0.8, yPos + 0.8, 5.5, 4.5, 'F');
                 doc.setTextColor(255, 255, 255);
-                doc.setFontSize(10);
-                doc.text((i + 1).toString(), xPos + 2.5, yPos + 4.5);
+                doc.setFontSize(8.5);
+                doc.text((i + 1).toString(), xPos + 2, yPos + 4);
 
                 xPos += 63;
                 if (i === 2) { 
-                    yPos += 54; 
+                    yPos += 50; 
                     xPos = 12; 
                 }
             } 
             else {
-                let imgWidth = 43;
-                let imgHeight = 35;
+                // تەرخانکردنی چوارگۆشە بۆ ڕێزەکانی خوارەوە (ماکسیمم پانی ٤٣ و درێژی ٣٣)
+                let maxWidth = 43;
+                let maxHeight = 33;
                 let spacing = 5;
+                
+                let finalWidth = maxWidth;
+                let finalHeight = maxWidth / currentImg.ratio;
 
-                if (yPos > 250) {
+                if (finalHeight > maxHeight) {
+                    finalHeight = maxHeight;
+                    finalWidth = maxHeight * currentImg.ratio;
+                }
+
+                if (yPos > 255) {
                     doc.addPage();
                     drawHeader(doc);
                     yPos = 56;
                     xPos = 12;
                 }
 
-                doc.addImage(imagesData[i], 'JPEG', xPos, yPos, imgWidth, imgHeight);
-                
-                // نووسینی ژمارەی وێنەکە بۆ ٤ دێڕییەکانی خوارەوە
-                doc.setFillColor(33, 150, 243);
-                doc.rect(xPos + 1, yPos + 1, 6, 5, 'F');
-                doc.setTextColor(255, 255, 255);
-                doc.setFontSize(9);
-                doc.text((i + 1).toString(), xPos + 2.5, yPos + 4.5);
+                let xOffset = xPos + (maxWidth - finalWidth) / 2;
+                let yOffset = yPos + (maxHeight - finalHeight) / 2;
 
-                xPos += imgWidth + spacing;
+                doc.addImage(currentImg.src, 'JPEG', xOffset, yOffset, finalWidth, finalHeight, undefined, 'FAST');
+                
+                doc.setFillColor(33, 150, 243);
+                doc.rect(xPos + 0.8, yPos + 0.8, 5.5, 4.5, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(8);
+                doc.text((i + 1).toString(), xPos + 2, yPos + 4);
+
+                xPos += maxWidth + spacing;
                 
                 if ((i - 2) % 4 === 0) {
                     xPos = 12;
-                    yPos += imgHeight + spacing;
+                    yPos += maxHeight + spacing;
                 }
             }
         }
         
         doc.setFontSize(9);
-        doc.setTextColor(150);
-        doc.text("Developed by: Mohammed Ezzadin", 105, 290, { align: "center" });
+        doc.setTextColor(160);
+        doc.text("Developed by: Mohammed Ezzadin", 105, 291, { align: "center" });
         
         doc.save(`${currentPatientName}_Bawayi_Report.pdf`);
     }
